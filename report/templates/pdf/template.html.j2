@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="/product_sku_report/templates/pdf/template.css" rel="stylesheet">
+        <title>Product SKU Report</title>
+    </head>
+    <body>
+        <table>
+        
+        {% for row in data %}
+            <tr>
+            {% for col in row %}
+                <td>{{ col }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        
+        </table>
+    </body>
+</html>
