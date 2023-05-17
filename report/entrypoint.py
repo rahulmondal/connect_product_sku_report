@@ -18,7 +18,7 @@ def __process_line(product, item):
         item['name'],
         item['description'],
         item['type'],
-        item['unit']['id'] if 'unit' in item else '',
+        item['unit']['name'] if 'unit' in item else '',
         item['precision'] if 'precision' in item else '',
         item['commitment']['count'] if 'commitment' in item else '',
         item['period'] if 'period' in item else '',
@@ -59,11 +59,20 @@ def generate(
     :type extra_context_callback: func
     """
 
+    account = client.accounts.all().first()
+
     products = client.products.filter(
         R().visibility.listing.eq(True) or
-        R().visibility.syndication.eq(True) or
-        R().visibility.owner.eq(True),
+        R().visibility.syndication.eq(True),
     ).all()
+
+    if account['type'] == 'vendor':
+        products = client.products.filter(
+            R().visibility.owner.eq(True),
+            R().version.eq(None),
+        ).all()
+
+
     total = products.count()
 
     counter = 0
