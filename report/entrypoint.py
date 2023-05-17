@@ -16,11 +16,11 @@ def __process_line(product, item):
         item['description'],
         item['type'],
         item['unit']['id'],
-        item['period'],
+        item['period'] if 'period' in item else '',
         item['precision'],
-        f"{item['commitment']['count']} item['commitment']['multiplier']",
-        item['commitment']['count'],
-        item['dynamic'],
+        f"{item['commitment']['count']} {item['commitment']['multiplier']}"
+        if 'commitment' in item else '',
+        item['dynamic'] if 'dynamic' in item else '',
     ]
 
 def generate(
