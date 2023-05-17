@@ -19,10 +19,9 @@ def __process_line(product, item):
         item['description'],
         item['type'],
         item['unit']['id'] if 'unit' in item else '',
-        item['period'] if 'period' in item else '',
         item['precision'] if 'precision' in item else '',
-        f"{item['commitment']['count']} {item['commitment']['multiplier']}"
-        if 'commitment' in item else '',
+        item['commitment']['count'] if 'commitment' in item else '',
+        item['period'] if 'period' in item else '',
         item['dynamic'] if 'dynamic' in item else '',
     ]
 
@@ -61,7 +60,9 @@ def generate(
     """
 
     products = client.products.filter(
-        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
+        R().visibility.listing.eq(True) or
+        R().visibility.syndication.eq(True) or
+        R().visibility.owner.eq(True),
     ).all()
     total = products.count()
 
