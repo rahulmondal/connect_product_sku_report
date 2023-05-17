@@ -6,6 +6,8 @@
 
 def __process_line(product, item):
     return [
+        product['owner']['id'],
+        product['owner']['name'],
         product['id'],
         product['name'],
         product['status'],
