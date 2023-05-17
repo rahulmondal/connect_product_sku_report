@@ -15,9 +15,9 @@ def __process_line(product, item):
         item['name'],
         item['description'],
         item['type'],
-        item['unit']['id'],
+        item['unit']['id'] if 'unit' in item else '',
         item['period'] if 'period' in item else '',
-        item['precision'],
+        item['precision'] if 'precision' in item else '',
         f"{item['commitment']['count']} {item['commitment']['multiplier']}"
         if 'commitment' in item else '',
         item['dynamic'] if 'dynamic' in item else '',
