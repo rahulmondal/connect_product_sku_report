@@ -69,7 +69,7 @@ def generate(
     if account['type'] == 'vendor':
         products = client.products.filter(
             R().visibility.owner.eq(True),
-            R().version.eq(None),
+            version=None,
         ).all()
 
 
