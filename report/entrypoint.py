@@ -68,7 +68,7 @@ def generate(
         items = client.products[product['id']].all()
 
         for item in items:
-            __process_line(product, item)
+            yield __process_line(product, item)
 
         counter += 1
         progress_callback(counter, total)
