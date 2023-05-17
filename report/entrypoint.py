@@ -2,6 +2,7 @@
 #
 # Copyright (c) 2023, Ingrammicro
 # All rights reserved.
+from connect.client import R
 
 
 def __process_line(product, item):
@@ -59,7 +60,10 @@ def generate(
     :type extra_context_callback: func
     """
 
-    products = client.products.all()
+    products = client.products.filter(
+        R().visibility.listing.eq('true'),
+        R().visibility.syndication.eq('true'),
+    ).all()
     total = products.count()
 
     counter = 0
