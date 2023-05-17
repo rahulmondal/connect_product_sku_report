@@ -65,7 +65,7 @@ def generate(
         yield 'EMPTY PRODUCTS'
 
     for product in products:
-        items = client.products[product['id']].all()
+        items = client.products[product['id']].items.all()
 
         for item in items:
             yield __process_line(product, item)
