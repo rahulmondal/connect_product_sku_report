@@ -61,8 +61,7 @@ def generate(
     """
 
     products = client.products.filter(
-        R().visibility.listing.eq('true'),
-        R().visibility.syndication.eq('true'),
+        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
     ).all()
     total = products.count()
 
